@@ -5,11 +5,11 @@ import cookieParser from 'cookie-parser'
 import { sendEnquiryEmail } from './controllers/query.controller.js';
 
 const app = express()
-const allowedOrigins = [`${process.env.FRONTEND_URL}`]
+const allowedOrigins = process.env.FRONTEND_URL
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({ credentials: true, origin: allowedOrigins }))
+app.use(cors({ credentials: true, origin: allowedOrigins.split(',') }))
 
 app.get('/', (_, res) => {
     res.send("API Working")
